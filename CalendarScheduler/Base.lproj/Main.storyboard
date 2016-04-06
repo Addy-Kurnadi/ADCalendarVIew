@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="mY1-z0-ZvE">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Calendar View-->
+        <scene sceneID="qcm-sc-gtm">
+            <objects>
+                <viewController id="mY1-z0-ZvE" customClass="CalendarView" customModule="CalendarScheduler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qso-KA-A0N"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cby-46-TRG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cqQ-sx-hcR">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tam-AF-l8W">
+                                <rect key="frame" x="0.0" y="129" width="1024" height="639"/>
+                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Vbi-Hi-Yrh">
+                                <rect key="frame" x="80" y="48" width="944" height="80"/>
+                                <color key="backgroundColor" white="0.950531868" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="EWs-fx-Ocq"/>
+                                    <constraint firstAttribute="width" constant="944" id="ruW-cz-p5h"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="foP-iU-Zm4">
+                                    <size key="itemSize" width="105" height="80"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="EcQ-YK-q1H" customClass="WeekHeaderCell" customModule="CalendarScheduler" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="105" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeF-gA-qAD">
+                                                    <rect key="frame" x="10" y="37" width="84" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2N-KL-ow5">
+                                                    <rect key="frame" x="31" y="15" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="ZJ0-4c-z5N"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="W2N-KL-ow5" firstAttribute="centerX" secondItem="EcQ-YK-q1H" secondAttribute="centerX" id="5Wz-wr-STH"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="IeF-gA-qAD" secondAttribute="bottom" constant="14" id="BBh-wV-0BI"/>
+                                            <constraint firstItem="W2N-KL-ow5" firstAttribute="top" secondItem="EcQ-YK-q1H" secondAttribute="topMargin" constant="7" id="O9I-cM-yCI"/>
+                                            <constraint firstItem="IeF-gA-qAD" firstAttribute="centerX" secondItem="W2N-KL-ow5" secondAttribute="centerX" id="U67-7r-woT"/>
+                                            <constraint firstItem="W2N-KL-ow5" firstAttribute="leading" secondItem="EcQ-YK-q1H" secondAttribute="leadingMargin" constant="23" id="jTS-IT-PjE"/>
+                                            <constraint firstItem="IeF-gA-qAD" firstAttribute="leading" secondItem="EcQ-YK-q1H" secondAttribute="leadingMargin" constant="2" id="pYz-Qe-psw"/>
+                                            <constraint firstItem="IeF-gA-qAD" firstAttribute="top" secondItem="W2N-KL-ow5" secondAttribute="bottom" constant="1" id="qkz-Iq-5GF"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="labelDate" destination="W2N-KL-ow5" id="LbD-3c-C4V"/>
+                                            <outlet property="labelDay" destination="IeF-gA-qAD" id="EdN-ft-JnO"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="mY1-z0-ZvE" id="Oqd-EB-SHO"/>
+                                    <outlet property="delegate" destination="mY1-z0-ZvE" id="Hfw-DI-l4P"/>
+                                </connections>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmI-VB-INu">
+                                <rect key="frame" x="0.0" y="48" width="80" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orL-VL-NU0">
+                                        <rect key="frame" x="8" y="0.0" width="64" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="orL-VL-NU0" firstAttribute="trailing" secondItem="dmI-VB-INu" secondAttribute="trailingMargin" id="KT9-Rd-Ic9"/>
+                                    <constraint firstItem="orL-VL-NU0" firstAttribute="top" secondItem="dmI-VB-INu" secondAttribute="top" id="OIW-H6-4b9"/>
+                                    <constraint firstItem="orL-VL-NU0" firstAttribute="leading" secondItem="dmI-VB-INu" secondAttribute="leadingMargin" id="wOX-QA-ThY"/>
+                                    <constraint firstAttribute="bottom" secondItem="orL-VL-NU0" secondAttribute="bottom" constant="52" id="zCA-zn-zfX"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EPO-3B-agi">
+                                <rect key="frame" x="0.0" y="128" width="1024" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dmI-VB-INu" firstAttribute="leading" secondItem="EPO-3B-agi" secondAttribute="leading" id="42r-F0-zH3"/>
+                            <constraint firstItem="EPO-3B-agi" firstAttribute="trailing" secondItem="Tam-AF-l8W" secondAttribute="trailing" id="4LO-nz-PGq"/>
+                            <constraint firstItem="EPO-3B-agi" firstAttribute="leading" secondItem="Tam-AF-l8W" secondAttribute="leading" id="4uy-oO-e1c"/>
+                            <constraint firstItem="Tam-AF-l8W" firstAttribute="top" secondItem="EPO-3B-agi" secondAttribute="bottom" id="C88-Fk-bX4"/>
+                            <constraint firstItem="Tam-AF-l8W" firstAttribute="leading" secondItem="cqQ-sx-hcR" secondAttribute="leading" id="Fra-4w-2r8"/>
+                            <constraint firstItem="Vbi-Hi-Yrh" firstAttribute="trailing" secondItem="EPO-3B-agi" secondAttribute="trailing" id="Gn1-D9-p6e"/>
+                            <constraint firstItem="Tam-AF-l8W" firstAttribute="bottom" secondItem="Cby-46-TRG" secondAttribute="top" id="JoH-sq-fNi"/>
+                            <constraint firstItem="EPO-3B-agi" firstAttribute="top" secondItem="dmI-VB-INu" secondAttribute="bottom" id="OCr-rq-9aK"/>
+                            <constraint firstItem="Vbi-Hi-Yrh" firstAttribute="leading" secondItem="dmI-VB-INu" secondAttribute="trailing" id="S36-fA-k6Z"/>
+                            <constraint firstAttribute="trailing" secondItem="Tam-AF-l8W" secondAttribute="trailing" id="bhM-Xp-e2Z"/>
+                            <constraint firstItem="dmI-VB-INu" firstAttribute="top" secondItem="Vbi-Hi-Yrh" secondAttribute="top" id="jPD-0K-8hY"/>
+                            <constraint firstItem="dmI-VB-INu" firstAttribute="top" secondItem="qso-KA-A0N" secondAttribute="bottom" constant="28" id="nJC-aY-Eer"/>
+                            <constraint firstItem="dmI-VB-INu" firstAttribute="bottom" secondItem="Vbi-Hi-Yrh" secondAttribute="bottom" id="omY-hM-6vb"/>
+                            <constraint firstItem="Tam-AF-l8W" firstAttribute="top" secondItem="qso-KA-A0N" secondAttribute="bottom" constant="109" id="tq2-eB-GAn"/>
+                        </constraints>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="collectionViewCal" destination="Hdv-td-FR9" id="NbE-f0-Ilh"/>
+                        <outlet property="collectionViewHeader" destination="Vbi-Hi-Yrh" id="KaC-yI-qNI"/>
+                        <outlet property="labelMonth" destination="orL-VL-NU0" id="Bsa-Gw-GeW"/>
+                        <outlet property="scrollView" destination="Tam-AF-l8W" id="CRC-Ls-DBc"/>
+                        <outlet property="tableViewHours" destination="25f-ZC-Ebj" id="GOz-yE-vwR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="It5-r6-3AU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="28" id="25f-ZC-Ebj">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <prototypes>
+                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="KTF-J9-Wag" style="IBUITableViewCellStyleDefault" id="e4p-b5-NPG">
+                            <rect key="frame" x="0.0" y="1" width="240" height="100"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e4p-b5-NPG" id="hpd-Aj-y8y">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KTF-J9-Wag">
+                                        <rect key="frame" x="15" y="0.0" width="210" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </tableViewCellContentView>
+                        </tableViewCell>
+                    </prototypes>
+                    <connections>
+                        <outlet property="dataSource" destination="mY1-z0-ZvE" id="jZj-5Y-FtU"/>
+                        <outlet property="delegate" destination="mY1-z0-ZvE" id="ZxP-Xi-Yyl"/>
+                    </connections>
+                </tableView>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Hdv-td-FR9">
+                    <rect key="frame" x="0.0" y="0.0" width="1022" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.95053186798474576" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="v8k-0a-2g0">
+                        <size key="itemSize" width="111" height="100"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells>
+                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="RIX-OE-Gmg" customClass="WeekCell" customModule="CalendarScheduler" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="111" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                <rect key="frame" x="0.0" y="0.0" width="111" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CML-Fz-NDx">
+                                        <rect key="frame" x="34" y="39" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="CML-Fz-NDx" firstAttribute="centerX" secondItem="RIX-OE-Gmg" secondAttribute="centerX" id="HZ7-ya-Zdw"/>
+                                <constraint firstItem="CML-Fz-NDx" firstAttribute="centerY" secondItem="RIX-OE-Gmg" secondAttribute="centerY" id="hFH-jm-uro"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="label" destination="CML-Fz-NDx" id="5Vb-vv-fY7"/>
+                            </connections>
+                        </collectionViewCell>
+                    </cells>
+                    <connections>
+                        <outlet property="dataSource" destination="mY1-z0-ZvE" id="OAr-6C-kar"/>
+                        <outlet property="delegate" destination="mY1-z0-ZvE" id="e8z-1M-hPd"/>
+                    </connections>
+                </collectionView>
+            </objects>
+            <point key="canvasLocation" x="570" y="1907"/>
+        </scene>
+    </scenes>
+</document>
