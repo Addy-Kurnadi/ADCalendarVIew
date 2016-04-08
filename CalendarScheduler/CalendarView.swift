@@ -37,11 +37,12 @@ struct HeaderDate {
 
 class CalendarView: UIViewController {
 
-    var numberOfCell : Int = 0;
     let numberOfRows : Int = 25;
     let numberOfColumns : Int = 7;
-    let cellHeight : CGFloat = 100;
+    let cellHeight : CGFloat = 111;
     var cellWidth: CGFloat = 0.0;
+    var weekViewCellHeight : CGFloat = 0;
+    
     let tableViewWidth : CGFloat = 80;
     
     var dictionaryOfEvent : [NSIndexPath:[Event]] = [:];
@@ -53,7 +54,7 @@ class CalendarView: UIViewController {
     let dateFormatter : NSDateFormatter;
     
     @IBOutlet weak var labelMonth: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollView: WeekScrollView!
     @IBOutlet var tableViewHours: UITableView!
     @IBOutlet weak var collectionViewCal: UICollectionView!
     @IBOutlet weak var collectionViewHeader: UICollectionView!
@@ -63,20 +64,19 @@ class CalendarView: UIViewController {
         self.calendar = NSCalendar.currentCalendar();
         self.dateFormatter = NSDateFormatter();
         super.init(coder: aDecoder);
-    
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.headerCollectionDate = ADDateFunctions.sevenDaysOfWeek(self.weekForDate);
 
-        self.addEvent();
+//        self.addEvent();
 
         let width = self.scrollView.frame.size.width - tableViewWidth;
-        self.numberOfCell = self.numberOfRows * self.numberOfColumns;
         
         self.cellWidth = width/CGFloat(self.numberOfColumns);
         let height = CGFloat(CGFloat(numberOfRows) * self.cellHeight);
+        self.weekViewCellHeight = height;
         
         let shiftUp:CGFloat = (self.cellHeight / 2) - 20;
         let frameTableViewHour = CGRectMake(0, -shiftUp, tableViewWidth, height+shiftUp);
@@ -86,11 +86,12 @@ class CalendarView: UIViewController {
         self.collectionViewCal.frame = frameCollectionView;
         
         self.scrollView.addSubview(self.collectionViewCal);
-        self.scrollView.addSubview(self.tableViewHours);
+//        self.scrollView.addSubview(self.tableViewHours);
+        
+        self.scrollView.addHourLines();
+//        self.scrollView.addHourLabel();
         
         self.scrollView.contentSize = self.collectionViewCal.frame.size;
-        
-        
         self.dateFormatter.dateFormat = "MMM";
         
         self.labelMonth.text = self.dateFormatter.stringFromDate(self.weekForDate).uppercaseString;
@@ -161,12 +162,7 @@ class CalendarView: UIViewController {
 
 extension CalendarView : UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        if collectionView == self.collectionViewCal {
-            return self.numberOfRows;
-        }
-        else {
-            return 1;
-        }
+        return 1;
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -176,9 +172,11 @@ extension CalendarView : UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionViewCal {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! WeekCell;
-
             cell.label.text = "";
-            self.addEventToCell(cell, indexPath: indexPath);
+            let frame = cell.frame;
+            
+            
+//            self.addEventToCell(cell, indexPath: indexPath);
             return cell;
         }
         else {
@@ -204,7 +202,7 @@ extension CalendarView : UICollectionViewDataSource {
 
 extension CalendarView : UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width:self.cellWidth-1.5, height: self.cellHeight);
+        return CGSize(width:self.cellWidth-1.5, height: self.weekViewCellHeight);
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {

@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		112DD29A1CB4071800A8644D /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112DD2991CB4071800A8644D /* WeekCell.swift */; };
 		112DD29C1CB4072F00A8644D /* ADDateFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112DD29B1CB4072F00A8644D /* ADDateFunctions.swift */; };
+		112DD29E1CB55A9500A8644D /* HourLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112DD29D1CB55A9500A8644D /* HourLine.swift */; };
+		112DD2A01CB5603000A8644D /* WeekScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112DD29F1CB5603000A8644D /* WeekScrollView.swift */; };
+		112DD2A21CB561D800A8644D /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112DD2A11CB561D800A8644D /* Constant.swift */; };
+		112FD3391CB56F5800311C3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112FD3381CB56F5800311C3F /* ViewController.swift */; };
 		6302CD321CA2429F009D0D3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6302CD311CA2429F009D0D3C /* AppDelegate.swift */; };
 		6302CD371CA2429F009D0D3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6302CD351CA2429F009D0D3C /* Main.storyboard */; };
 		6302CD391CA2429F009D0D3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6302CD381CA2429F009D0D3C /* Assets.xcassets */; };
@@ -22,6 +26,10 @@
 /* Begin PBXFileReference section */
 		112DD2991CB4071800A8644D /* WeekCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		112DD29B1CB4072F00A8644D /* ADDateFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADDateFunctions.swift; sourceTree = "<group>"; };
+		112DD29D1CB55A9500A8644D /* HourLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourLine.swift; sourceTree = "<group>"; };
+		112DD29F1CB5603000A8644D /* WeekScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekScrollView.swift; sourceTree = "<group>"; };
+		112DD2A11CB561D800A8644D /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		112FD3381CB56F5800311C3F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6302CD2E1CA2429F009D0D3C /* CalendarScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6302CD311CA2429F009D0D3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6302CD361CA2429F009D0D3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,6 +83,10 @@
 				6302CD471CA2466D009D0D3C /* CalendarView.swift */,
 				6302CD491CA25CE1009D0D3C /* CalendarViewFlowLayout.swift */,
 				112DD29B1CB4072F00A8644D /* ADDateFunctions.swift */,
+				112DD29D1CB55A9500A8644D /* HourLine.swift */,
+				112DD29F1CB5603000A8644D /* WeekScrollView.swift */,
+				112DD2A11CB561D800A8644D /* Constant.swift */,
+				112FD3381CB56F5800311C3F /* ViewController.swift */,
 			);
 			path = CalendarScheduler;
 			sourceTree = "<group>";
@@ -151,12 +163,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				112DD29C1CB4072F00A8644D /* ADDateFunctions.swift in Sources */,
+				112DD2A01CB5603000A8644D /* WeekScrollView.swift in Sources */,
 				6302CD481CA2466D009D0D3C /* CalendarView.swift in Sources */,
 				112DD29A1CB4071800A8644D /* WeekCell.swift in Sources */,
+				112FD3391CB56F5800311C3F /* ViewController.swift in Sources */,
 				6302CD4A1CA25CE1009D0D3C /* CalendarViewFlowLayout.swift in Sources */,
 				6302CD321CA2429F009D0D3C /* AppDelegate.swift in Sources */,
 				6302CD4E1CA26BF1009D0D3C /* WeekHeaderCell.swift in Sources */,
+				112DD2A21CB561D800A8644D /* Constant.swift in Sources */,
 				6302CD501CA2894B009D0D3C /* WeekViewEvent.swift in Sources */,
+				112DD29E1CB55A9500A8644D /* HourLine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
