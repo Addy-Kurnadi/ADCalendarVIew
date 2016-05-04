@@ -8,12 +8,11 @@
 
 import UIKit
 
-
-
 struct EventDate {
     let hour : Int;
     let minute : Int;
     let date : Int;
+    let timeReference : NSTimeInterval;
 }
 
 struct Event {
@@ -36,26 +35,20 @@ struct HeaderDate {
 }
 
 class CalendarView: UIViewController {
-
-    let numberOfRows : Int = 25;
-    let numberOfColumns : Int = 7;
     let cellHeight : CGFloat = 111;
     var cellWidth: CGFloat = 0.0;
     var weekViewCellHeight : CGFloat = 0;
     
-    let tableViewWidth : CGFloat = 80;
-    
-    var dictionaryOfEvent : [NSIndexPath:[Event]] = [:];
+    var dictionaryOfEvent : [Int:[Event]] = [:];
+    var dictionaryDayToColumn : [Int:Int] = [:];
     
     let weekForDate : NSDate;
     var headerCollectionDate : [HeaderDate] = [];
-    
     let calendar : NSCalendar;
     let dateFormatter : NSDateFormatter;
     
     @IBOutlet weak var labelMonth: UILabel!
     @IBOutlet weak var scrollView: WeekScrollView!
-    @IBOutlet var tableViewHours: UITableView!
     @IBOutlet weak var collectionViewCal: UICollectionView!
     @IBOutlet weak var collectionViewHeader: UICollectionView!
     
@@ -68,35 +61,46 @@ class CalendarView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.headerCollectionDate = ADDateFunctions.sevenDaysOfWeek(self.weekForDate);
-
-//        self.addEvent();
-
-        let width = self.scrollView.frame.size.width - tableViewWidth;
+        let result = ADDateFunctions.sevenDaysOfWeek(self.weekForDate);
+        self.headerCollectionDate = result.headerDates;
+        self.dictionaryDayToColumn = result.indexToDate;
         
-        self.cellWidth = width/CGFloat(self.numberOfColumns);
-        let height = CGFloat(CGFloat(numberOfRows) * self.cellHeight);
+        self.addEvent();
+        let width = self.scrollView.frame.size.width - CalendarConstant.scrollViewLabelWidth;
+        
+        self.cellWidth = width/CGFloat(CalendarConstant.weekCalendarColumns);
+        let height = CGFloat(CGFloat(CalendarConstant.weekCalendarRows) * self.cellHeight);
         self.weekViewCellHeight = height;
         
-        let shiftUp:CGFloat = (self.cellHeight / 2) - 20;
-        let frameTableViewHour = CGRectMake(0, -shiftUp, tableViewWidth, height+shiftUp);
-        self.tableViewHours.frame = frameTableViewHour;
-        
-        let frameCollectionView = CGRectMake(tableViewWidth, -80, self.scrollView.frame.size.width - tableViewWidth, height);
+        let frameCollectionView = CGRectMake(CalendarConstant.scrollViewLabelWidth, 0, self.scrollView.frame.size.width - CalendarConstant.scrollViewLabelWidth, height);
         self.collectionViewCal.frame = frameCollectionView;
-        
-        self.scrollView.addSubview(self.collectionViewCal);
-//        self.scrollView.addSubview(self.tableViewHours);
+        self.collectionViewCal.backgroundColor = UIColor.clearColor();
+        self.collectionViewHeader.backgroundColor = UIColor.clearColor();
         
         self.scrollView.addHourLines();
-//        self.scrollView.addHourLabel();
-        
+        self.addDayLines(CalendarConstant.scrollViewLabelWidth - 1, spacing: self.cellWidth);
+
+        self.scrollView.addSubview(self.collectionViewCal);
         self.scrollView.contentSize = self.collectionViewCal.frame.size;
         self.dateFormatter.dateFormat = "MMM";
         
         self.labelMonth.text = self.dateFormatter.stringFromDate(self.weekForDate).uppercaseString;
         
         self.collectionViewCal.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context: nil);
+    }
+    
+    func addDayLines(startX:CGFloat, spacing:CGFloat)
+    {
+        var posX : CGFloat = startX;
+        for _ in 0...6 {
+            let lineFrame = CGRectMake(posX, self.scrollView.frame.minY, 1, self.view.bounds.maxY);
+            let lineView = UIView(frame: lineFrame);
+            lineView.backgroundColor = CalendarConstant.WeekLineColor;
+            
+            self.view.addSubview(lineView);
+            let maxX = lineFrame.maxX;
+            posX = maxX + spacing - 1 ;
+        }
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -110,8 +114,13 @@ class CalendarView: UIViewController {
     func addEvent() {
         let data = self.generateMockEvent();
         for obj in data {
-            let indexPath = self.timelineToIndexPath(obj.startEvent);
-            self.dictionaryOfEvent[indexPath] = [obj];
+            let indexColumn = self.dateToRow(obj.startEvent.date);
+            
+            if self.dictionaryOfEvent[indexColumn] == nil {
+                self.dictionaryOfEvent[indexColumn] = [];
+            }
+            
+            self.dictionaryOfEvent[indexColumn]!.append(obj);
         }
         
     }
@@ -138,24 +147,28 @@ class CalendarView: UIViewController {
     
     func timelineToIndexPath(eventDate :EventDate) -> NSIndexPath
     {
-        return NSIndexPath(forRow: self.dateToRow(eventDate.date), inSection: self.hourToSection(eventDate.hour));
+        let indexColumn = self.dateToRow(eventDate.date);
+        return NSIndexPath(forRow: indexColumn, inSection: 0);
     }
     
     func generateMockEvent() -> [Event]
     {
-        let date1 = ADDateFunctions.generateDate(day: 6, month: 4, year: 2016, hour: 3, minute: 10)!;
-        let date2 = ADDateFunctions.generateDate(day: 5, month: 4, year: 2016, hour: 5, minute: 10)!;
-        let date3 = ADDateFunctions.generateDate(day: 7, month: 4, year: 2016, hour: 7, minute: 10)!;
-        
+        let date1 = ADDateFunctions.generateDate(day: 1, month: 5, year: 2016, hour: 1, minute: 0)!;
+        let date2 = ADDateFunctions.generateDate(day: 1, month: 5, year: 2016, hour: 1, minute: 20)!;
+        let date3 = ADDateFunctions.generateDate(day: 1, month: 5, year: 2016, hour: 1, minute: 50)!;
+        let date4 = ADDateFunctions.generateDate(day: 1, month: 5, year: 2016, hour: 2, minute: 10)!;
+
         let eventDate1 = ADDateFunctions.convertDateToEventDate(date1);
         let eventDate2 = ADDateFunctions.convertDateToEventDate(date2);
         let eventDate3 = ADDateFunctions.convertDateToEventDate(date3);
-        
-        let event1 = Event(startEvent: eventDate1, duration:60, title: "J2310", description: "Wednesday");
-        let event2 = Event(startEvent: eventDate2, duration:60, title: "J2310", description: "Tuesday");
-        let event3 = Event(startEvent: eventDate3, duration:60, title: "J2310", description: "Thursday");
-        
-        return [event1,event2,event3];
+        let eventDate4 = ADDateFunctions.convertDateToEventDate(date4);
+
+        let event1 = Event(startEvent: eventDate1, duration:60, title: "J0001", description: "Perth");
+        let event2 = Event(startEvent: eventDate2, duration:60, title: "J0002", description: "Malaga");
+        let event3 = Event(startEvent: eventDate3, duration:120, title: "J0003", description: "Como");
+        let event4 = Event(startEvent: eventDate4, duration:90, title: "J0004", description: "Leeming");
+
+        return [event1,event2,event3,event4];
     }
 }
 
@@ -166,17 +179,15 @@ extension CalendarView : UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.numberOfColumns;
+        return CalendarConstant.weekCalendarColumns;
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionViewCal {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! WeekCell;
             cell.label.text = "";
-            let frame = cell.frame;
-            
-            
-//            self.addEventToCell(cell, indexPath: indexPath);
+            cell.backgroundColor = UIColor.clearColor();
+            self.addEventToCell(cell, column: indexPath.row);
             return cell;
         }
         else {
@@ -184,20 +195,18 @@ extension CalendarView : UICollectionViewDataSource {
             let header = self.headerCollectionDate[indexPath.row];
             cell.labelDay.text = header.weekday;
             cell.labelDate.text = header.dateString;
-            
+            cell.backgroundColor = UIColor.clearColor();
             return cell;
         }
     }
     
-    func addEventToCell(cell:WeekCell,indexPath:NSIndexPath) {
-        if let _ = self.dictionaryOfEvent[indexPath] {
-            let frame = cell.frame;
-            let viewEvent = WeekViewEvent(frame: CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height), color: UIColor(red:49/255, green:181/255, blue:247/255, alpha:0.5));
-            viewEvent.labelTitle.text = "J232314"
-            viewEvent.setDescription("ADEVE Co\n1 Murray St, Perth, WA 6000");
-            self.collectionViewCal.addSubview(viewEvent);
+    func addEventToCell(cell:WeekCell,column:Int) {
+        if let events = self.dictionaryOfEvent[column] where events.count > 0 {
+            cell.addEventCollections(events);
         }
     }
+    
+
 }
 
 extension CalendarView : UICollectionViewDelegateFlowLayout {
@@ -215,38 +224,6 @@ extension CalendarView : UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0.0;
-    }
-}
-
-
-extension CalendarView : UITableViewDataSource, UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1;
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.numberOfRows - 1;
-    }
-    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0;
-    }
-    
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0;
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return self.cellHeight + 1.0;
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath);
-        let hourText = "\(indexPath.row):00";
-        
-        cell.textLabel?.text = hourText;
-        
-        return cell;
     }
 }
 

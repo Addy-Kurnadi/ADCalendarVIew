@@ -21,6 +21,9 @@
 		6302CD4A1CA25CE1009D0D3C /* CalendarViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6302CD491CA25CE1009D0D3C /* CalendarViewFlowLayout.swift */; };
 		6302CD4E1CA26BF1009D0D3C /* WeekHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6302CD4D1CA26BF1009D0D3C /* WeekHeaderCell.swift */; };
 		6302CD501CA2894B009D0D3C /* WeekViewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6302CD4F1CA2894B009D0D3C /* WeekViewEvent.swift */; };
+		63605DEE1CD753EC00729EF0 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63605DED1CD753EC00729EF0 /* UIColorExtension.swift */; };
+		63605DF01CD855FC00729EF0 /* CalendarFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63605DEF1CD855FC00729EF0 /* CalendarFunctions.swift */; };
+		63605DF21CD9924900729EF0 /* WeekCalendarFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63605DF11CD9924900729EF0 /* WeekCalendarFunction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		6302CD491CA25CE1009D0D3C /* CalendarViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewFlowLayout.swift; sourceTree = "<group>"; };
 		6302CD4D1CA26BF1009D0D3C /* WeekHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekHeaderCell.swift; sourceTree = "<group>"; };
 		6302CD4F1CA2894B009D0D3C /* WeekViewEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekViewEvent.swift; sourceTree = "<group>"; };
+		63605DED1CD753EC00729EF0 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		63605DEF1CD855FC00729EF0 /* CalendarFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarFunctions.swift; sourceTree = "<group>"; };
+		63605DF11CD9924900729EF0 /* WeekCalendarFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekCalendarFunction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,11 +88,14 @@
 				6302CD4F1CA2894B009D0D3C /* WeekViewEvent.swift */,
 				6302CD471CA2466D009D0D3C /* CalendarView.swift */,
 				6302CD491CA25CE1009D0D3C /* CalendarViewFlowLayout.swift */,
-				112DD29B1CB4072F00A8644D /* ADDateFunctions.swift */,
 				112DD29D1CB55A9500A8644D /* HourLine.swift */,
 				112DD29F1CB5603000A8644D /* WeekScrollView.swift */,
+				63605DED1CD753EC00729EF0 /* UIColorExtension.swift */,
 				112DD2A11CB561D800A8644D /* Constant.swift */,
+				63605DEF1CD855FC00729EF0 /* CalendarFunctions.swift */,
+				112DD29B1CB4072F00A8644D /* ADDateFunctions.swift */,
 				112FD3381CB56F5800311C3F /* ViewController.swift */,
+				63605DF11CD9924900729EF0 /* WeekCalendarFunction.swift */,
 			);
 			path = CalendarScheduler;
 			sourceTree = "<group>";
@@ -167,12 +176,15 @@
 				6302CD481CA2466D009D0D3C /* CalendarView.swift in Sources */,
 				112DD29A1CB4071800A8644D /* WeekCell.swift in Sources */,
 				112FD3391CB56F5800311C3F /* ViewController.swift in Sources */,
+				63605DF01CD855FC00729EF0 /* CalendarFunctions.swift in Sources */,
 				6302CD4A1CA25CE1009D0D3C /* CalendarViewFlowLayout.swift in Sources */,
+				63605DF21CD9924900729EF0 /* WeekCalendarFunction.swift in Sources */,
 				6302CD321CA2429F009D0D3C /* AppDelegate.swift in Sources */,
 				6302CD4E1CA26BF1009D0D3C /* WeekHeaderCell.swift in Sources */,
 				112DD2A21CB561D800A8644D /* Constant.swift in Sources */,
 				6302CD501CA2894B009D0D3C /* WeekViewEvent.swift in Sources */,
 				112DD29E1CB55A9500A8644D /* HourLine.swift in Sources */,
+				63605DEE1CD753EC00729EF0 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +302,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.AscSoftware.Ascora.CalendarScheduler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -302,6 +315,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.AscSoftware.Ascora.CalendarScheduler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

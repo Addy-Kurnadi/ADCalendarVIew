@@ -14,15 +14,6 @@ struct WeekSVConstant {
 }
 
 class WeekScrollView: UIScrollView {
-    
-    var hourLineSpacingY : CGFloat = 100;
-    var hourLineStartY : CGFloat = 10;
-    var numberOfLines : Int = 23;
-    
-    var hourLabelWidth : CGFloat = 60;
-    var hourLabelHeight : CGFloat = 21;
-    var hourLabelStartY : CGFloat = 20;
-    
 //    func addHourLines()
 //    {
 //        var posY : CGFloat = self.hourLineStartY;
@@ -64,41 +55,38 @@ class WeekScrollView: UIScrollView {
     
     func addHourLines()
     {
-        var posY : CGFloat = self.hourLineStartY;
-        for hour in 0...self.numberOfLines {
+        var posY : CGFloat = CalendarConstant.hourLineStartY;
+        for hour in 0...CalendarConstant.numberOfLines {
             
-            let labelFrame = CGRectMake(self.bounds.minX + WeekSVConstant.leftSpacing, posY, self.hourLabelWidth, self.hourLabelHeight);
+            let lineFrame = CGRectMake(CalendarConstant.hourLabelWidth + WeekSVConstant.labelLineSpacing , posY, self.bounds.maxX, 1);
+            let lineView = UIView(frame: lineFrame);
+            lineView.backgroundColor = CalendarConstant.WeekLineColor;
+            
+            let labelFrame = CGRectMake(self.bounds.minX + WeekSVConstant.leftSpacing, posY - 11, CalendarConstant.hourLabelWidth, CalendarConstant.hourLabelHeight);
             let label = UILabel(frame: labelFrame);
             label.text = "\(hour):00";
             label.font = UIFont.systemFontOfSize(14);
-            
-            let lineFrame = CGRectMake(label.frame.maxX + WeekSVConstant.labelLineSpacing , posY + 11, self.bounds.maxX, 1);
-            let lineView = UIView(frame: lineFrame);
-            lineView.backgroundColor = UIConstant.WeekLineColor;
-            
-            
             
             self.addSubview(lineView);
             self.addSubview(label);
             
             let maxY = lineFrame.maxY;
-            posY = maxY + hourLineSpacingY;
+            posY = maxY + CalendarConstant.hourLineSpacingY;
         }
     }
     
-    func addHourLabel()
+    func addDayLines(startX:CGFloat, spacing:CGFloat)
     {
-        var posY : CGFloat = self.hourLineStartY - (self.hourLabelHeight / 2);
-        let labelSpacing : CGFloat = self.hourLineSpacingY - self.hourLabelHeight;
-        
-        for hour in 0...self.numberOfLines {
-            let frame = CGRectMake(self.bounds.minX + WeekSVConstant.leftSpacing, posY, self.hourLabelWidth, self.hourLabelHeight);
-            let label = UILabel(frame: frame);
-            label.text = "\(hour):00";
-            label.font = UIFont.systemFontOfSize(14);
+//        let ceilSpacing = ceil(spacing);
+        var posX : CGFloat = startX;
+        for _ in 0...6 {
+            let lineFrame = CGRectMake(posX, 0, 1, self.bounds.maxY);
+            let lineView = UIView(frame: lineFrame);
+            lineView.backgroundColor = CalendarConstant.WeekLineColor;
             
-            self.addSubview(label);
-            posY = frame.maxY + labelSpacing;
+            self.addSubview(lineView);
+            let maxX = lineFrame.maxX;
+            posX = maxX + spacing - 1 ;
         }
     }
 }

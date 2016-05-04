@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let lineView = UIView(frame: CGRectMake(20, 20, 400, 1));
-        lineView.backgroundColor = UIConstant.WeekLineColor;
+        lineView.backgroundColor = CalendarConstant.WeekLineColor;
         lineView.translatesAutoresizingMaskIntoConstraints = false;
         let label = UILabel(frame: CGRectMake(40, 40, 70, 20));
         label.text = "1:00";

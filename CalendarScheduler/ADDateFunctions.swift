@@ -44,7 +44,7 @@ class ADDateFunctions {
     
     func convertDateToEventDate(date:NSDate) -> EventDate {
         let component = calendar.components([.Hour, .Minute, .Day], fromDate: date);
-        let eventDate = EventDate(hour:component.hour, minute: component.minute, date: component.day);
+        let eventDate = EventDate(hour:component.hour, minute: component.minute, date: component.day, timeReference:date.timeIntervalSinceReferenceDate);
         
         return eventDate;
     }
@@ -58,18 +58,24 @@ class ADDateFunctions {
         return ADDateFunctions.sharedInstance.convertDateToEventDate(date);
     }
     
-    static func sevenDaysOfWeek(date:NSDate) -> [HeaderDate] {
+    static func sevenDaysOfWeek(date:NSDate) -> (headerDates:[HeaderDate], indexToDate:[Int:Int] ){
         var dates = [HeaderDate]();
+        var idx = 0;
+        var indexToDate : [Int:Int] = [:];
         
-        for idx in 1...7 {
-            if let dateOfMonth = self.dayOfCurrentMonth(idx)
+        // Sunday = 1, Monday = 2, etc
+        for weekday in 1...7 {
+            if let dateOfMonth = self.dayOfCurrentMonth(weekday, date:date)
             {
-                let weekday = self.weekdayToString(idx)
-                dates.append(HeaderDate(column:idx-1, date: dateOfMonth, weekday: weekday));
+                let weekdayInString = self.weekdayToString(weekday)
+                dates.append(HeaderDate(column:weekday-1, date: dateOfMonth, weekday: weekdayInString));
+                indexToDate[idx] = dateOfMonth;
             }
+            
+            idx += 1;
         }
         
-        return dates;
+        return (dates, indexToDate);
     }
     
     static func weekdayToString(day:Int) -> String
@@ -95,14 +101,13 @@ class ADDateFunctions {
         }
     }
     
-    static func dayOfCurrentMonth(weekday:Int) -> Int? {
+    static func dayOfCurrentMonth(weekday:Int, date:NSDate) -> Int? {
         if weekday < 1 || weekday > 7 {
             return nil;
         }
         
-        let today = NSDate();
         let calendar = NSCalendar.currentCalendar();
-        let component = calendar.components([.Day,.Weekday], fromDate: today);
+        let component = calendar.components([.Day,.Weekday], fromDate: date);
         let dayOfWeek = component.weekday
         let dayOfMonth = component.day;
         print("current week \(dayOfWeek), currentMonth \(dayOfMonth)");
